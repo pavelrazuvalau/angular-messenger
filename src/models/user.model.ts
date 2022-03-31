@@ -1,5 +1,5 @@
 export interface UserModel {
   username: string;
-  last_seen: string; // online or last seen date
+  last_seen: 'online' | string;
   id: string;
 }
