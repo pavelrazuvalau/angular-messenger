@@ -3,3 +3,5 @@ export interface UserModel {
   last_seen: 'online' | string;
   id: string;
 }
+
+export type foo = 'a' | 'b';

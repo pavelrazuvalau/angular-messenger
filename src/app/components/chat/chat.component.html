@@ -1,0 +1,20 @@
+<ng-container *ngIf="selectedConversation">
+  <div class="selected-user">
+    <span>To: <span class="name">{{ selectedConversation.participants[1].username }}</span></span>
+  </div>
+  <div class="chat-container">
+    <ul class="chat-box chatContainerScroll">
+      <app-chat-message
+        *ngFor="let message of selectedConversation.messages"
+        [message]="message"
+        [user]="getUser(message)"
+      >
+
+      </app-chat-message>
+    </ul>
+    <form class="input-group mt-3 mb-0" (submit)="onPostMessage()">
+      <input [(ngModel)]="newMessage" class="form-control" rows="3" placeholder="Type your message here..." name="message">
+      <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</ng-container>
