@@ -1,14 +1,14 @@
 import { UserModel } from './user.model';
-import { MessageModel } from './message.model';
+import { ConversationMessageModel } from './message.model';
 
 export interface BaseConversationModel {
   id: string;
   participants: UserModel[];
-  last_message: MessageModel;
+  last_message: ConversationMessageModel;
 }
 
 export interface SelectedConversationModel extends BaseConversationModel {
-  messages: MessageModel[],
+  messages: ConversationMessageModel[],
 }
 
 export interface ConversationListResponseModel {
