@@ -1,0 +1,22 @@
+<div class="users-container">
+  <div class="chat-search-box">
+    <div class="form-group">
+      <input [(ngModel)]="searchTerm" class="form-control" placeholder="Search">
+    </div>
+  </div>
+  <ul class="users">
+    <li class="person"
+        [class.active-user]="item.id === selectedConversationId"
+        *ngFor="let item of list | filter:searchTerm" (click)="onSelectConversation(item)"
+    >
+      <div class="user" [appStatus]="item.participants[1].last_seen === 'online'">
+        <img src="../../../../assets/img/avatar.png">
+      </div>
+      <p class="name-time">
+        <span class="name">{{ item.participants[1].username }}</span>
+        &nbsp;
+        <span class="time">{{ item.last_message.timestamp | date:'short' }}</span>
+      </p>
+    </li>
+  </ul>
+</div>

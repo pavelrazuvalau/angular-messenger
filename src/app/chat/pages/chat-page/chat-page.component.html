@@ -1,0 +1,15 @@
+<div class="card m-0">
+
+  <!-- Row start -->
+  <div class="row no-gutters">
+
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
+      <app-conversation-list [list]="conversationList" [selectedConversationId]="selectedConversation?.id"></app-conversation-list>
+    </div>
+
+    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
+      <app-chat [selectedConversation]="selectedConversation" [currentUser]="currentUser" (postMessage)="onPostMessage($event)"></app-chat>
+    </div>
+  </div>
+  <!-- Row end -->
+</div>
