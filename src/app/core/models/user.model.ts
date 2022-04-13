@@ -3,3 +3,7 @@ export interface UserModel {
   last_seen: 'online' | string;
   id: string;
 }
+
+export interface UserSearchResponseModel {
+  users: UserModel[];
+}

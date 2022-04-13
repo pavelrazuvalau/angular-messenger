@@ -1,8 +1,22 @@
-<div class="page-title">
-  <div class="row gutters">
-    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-      <h5 class="title">Angular Messenger</h5>
-    </div>
-    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"></div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/">Angular Messenger</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a routerLink="/auth/sign-in" class="nav-link">Sign in</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/auth/sign-up" class="nav-link">Sign up</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav" *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <button class="nav-link">Logout</button>
+      </li>
+    </ul>
   </div>
-</div>
+</nav>
