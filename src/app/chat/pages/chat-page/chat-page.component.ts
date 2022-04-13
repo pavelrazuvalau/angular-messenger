@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseConversationModel, SelectedConversationModel } from '../../models/conversation.model';
-import { MessageSendRequestModel } from '../../models/message.model';
+import { MessageSendRequestModel } from '../../../core/models/message.model';
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../../services/chat.service';
 import { UserService } from '../../../core/services/user.service';

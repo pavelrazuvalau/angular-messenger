@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SelectedConversationModel } from '../../models/conversation.model';
-import { ConversationMessageModel, MessageSendRequestModel } from '../../models/message.model';
+import { ConversationMessageModel, MessageSendRequestModel } from '../../../core/models/message.model';
 import { UserModel } from '../../../core/models/user.model';
 
 @Component({

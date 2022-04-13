@@ -1,5 +1,5 @@
 import { UserModel } from '../../core/models/user.model';
-import { ConversationMessageModel } from './message.model';
+import { ConversationMessageModel } from '../../core/models/message.model';
 
 export interface BaseConversationModel {
   id: string;

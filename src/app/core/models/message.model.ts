@@ -1,4 +1,4 @@
-import { UserModel } from '../../core/models/user.model';
+import { UserModel } from './user.model';
 
 export interface BaseMessageModel {
   id: string;
@@ -6,7 +6,7 @@ export interface BaseMessageModel {
   timestamp: string;
 }
 
-export interface ConversationMessageModel extends BaseMessageModel{
+export interface ConversationMessageModel extends BaseMessageModel {
   recipient: string;
   sender: string;
 }

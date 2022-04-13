@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ConversationMessageModel } from '../../models/message.model';
+import { ConversationMessageModel } from '../../../core/models/message.model';
 import { UserModel } from '../../../core/models/user.model';
 
 @Component({
