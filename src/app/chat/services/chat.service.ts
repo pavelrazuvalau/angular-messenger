@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseConversationModel, SelectedConversationModel } from '../models/conversation.model';
 
@@ -252,7 +253,7 @@ export class ChatService {
     },
   ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getConversationList() {
     return this.conversationListMock;

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-start">
   <a class="navbar-brand" routerLink="/">Angular Messenger</a>
 
-  <ul class="navbar-nav d-flex flex-row" *ngIf="!isLoggedIn">
+  <ul class="navbar-nav d-flex flex-row" *ngIf="(isLoggedIn$ | async) === false">
     <li class="nav-item">
       <a routerLink="/auth/sign-in" class="nav-link">Sign in</a>
     </li>
@@ -10,9 +10,9 @@
     </li>
   </ul>
 
-  <ul class="navbar-nav" *ngIf="isLoggedIn">
+  <ul class="navbar-nav" *ngIf="isLoggedIn$ | async">
     <li class="nav-item">
-      <button class="nav-link">Logout</button>
+      <button (click)="logout()" class="nav-link">Logout</button>
     </li>
   </ul>
 </nav>
