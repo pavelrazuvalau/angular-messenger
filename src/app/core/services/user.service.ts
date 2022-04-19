@@ -53,6 +53,7 @@ export class UserService {
   }
 
   setCurrentUser(user: UserModel) {
+    console.log(user)
     this.isUserFetched$.next();
     this.currentUser$.next(user);
   }

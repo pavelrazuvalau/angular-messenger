@@ -1,9 +1,11 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable, OnDestroy } from '@angular/core';
+import { map, Observable, ReplaySubject, take } from 'rxjs';
+import { UserModel } from 'src/app/core/models/user.model';
 import { BaseConversationModel, SelectedConversationModel } from '../models/conversation.model';
 
 @Injectable()
-export class ChatService {
+export class ChatService implements OnDestroy {
   private selectedConversationsMock: SelectedConversationModel[] = [
     {
       last_message: {
@@ -253,13 +255,41 @@ export class ChatService {
     },
   ];
 
+  public usersSubject = new ReplaySubject<UserModel[]>();
+
   constructor(private http: HttpClient) { }
 
   getConversationList() {
     return this.conversationListMock;
   }
 
+  public searchUsers(searchRequest: string): void {
+    if (!searchRequest) {
+      this.usersSubject.next([])
+    } else {
+      this.http.get<{ users: UserModel[] }>('user/search', {
+        params: new HttpParams().set('q', searchRequest),
+      }).pipe(
+        take(1),
+        map(resp => this.usersSubject.next(resp.users)),
+      ).subscribe();
+    }
+  }
+
   selectConversation(id: string) {
     return this.selectedConversationsMock.find(item => item.id === id);
+  }
+
+  sendMessage(recipient: string, message: string): Observable<any> {
+    return this.http.post('message/send', {
+      recipient: recipient,
+      message: message,
+    }).pipe(
+      take(1)
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.usersSubject.complete();
   }
 }

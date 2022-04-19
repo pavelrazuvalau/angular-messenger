@@ -1,14 +1,12 @@
 <div class="users-container">
   <div class="chat-search-box">
     <div class="form-group">
-      <input [(ngModel)]="searchTerm" class="form-control" placeholder="Search">
+      <input [(ngModel)]="searchTerm" class="form-control" placeholder="Search" (input)="onSearchInput()">
     </div>
   </div>
-  <ul class="users">
-    <li class="person"
-        [class.active-user]="item.id === selectedConversationId"
-        *ngFor="let item of list | filter:searchTerm" (click)="onSelectConversation(item)"
-    >
+  <ul class="users" *ngIf="!searchTerm; else foundedUsers">
+    <li class="person" [class.active-user]="item.id === selectedConversationId" *ngFor="let item of list"
+      (click)="onSelectConversation(item)">
       <div class="user" [appStatus]="item.participants[1].last_seen === 'online'">
         <img src="../../../../assets/img/avatar.png">
       </div>
@@ -18,5 +16,21 @@
         <span class="time">{{ item.last_message.timestamp | date:'short' }}</span>
       </p>
     </li>
+
   </ul>
+  <ng-template #foundedUsers>
+    <ul class="users">
+      <li class="person" *ngFor="let user of users | async" (click)="onSelectUser()">
+        <div class="user" [appStatus]="user.last_seen === 'online'">
+          <img src="../../../../assets/img/avatar.png">
+        </div>
+        <p class="name-time">
+          <span class="name">{{ user.username }}</span>
+          &nbsp;
+          <span class="time">{{ user.last_seen | date:'short' }}</span>
+        </p>
+      </li>
+
+    </ul>
+  </ng-template>
 </div>
