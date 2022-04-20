@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { SelectedConversationModel } from '../../models/conversation.model';
 import { ConversationMessageModel, MessageSendRequestModel } from '../../../core/models/message.model';
 import { UserModel } from '../../../core/models/user.model';
@@ -10,12 +10,10 @@ import { UserModel } from '../../../core/models/user.model';
 })
 export class ChatComponent implements OnInit {
   @Input() selectedConversation: SelectedConversationModel | undefined;
-  @Input() currentUser: UserModel | undefined;
+  @Input() currentUser: UserModel | null = null;
   @Output() postMessage = new EventEmitter<MessageSendRequestModel>();
 
   newMessage: string = '';
-
-  constructor() { }
 
   ngOnInit(): void {
   }
@@ -27,7 +25,7 @@ export class ChatComponent implements OnInit {
   onPostMessage() {
     this.postMessage.emit({
       message: this.newMessage,
-      recipient: this.selectedConversation?.participants[1].id || ''
+      recipient: this.selectedConversation?.participants[0].id || ''
     });
     this.newMessage = '';
   }

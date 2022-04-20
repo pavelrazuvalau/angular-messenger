@@ -14,20 +14,10 @@ import { UserModel } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  currentUserMock: UserModel = {
-    username: 'Steve Bangalter',
-    last_seen: 'online',
-    id: '62154955353e6c41ea0348ee',
-  };
-
   private currentUser$ = new BehaviorSubject<UserModel | null>(null);
   private isUserFetched$ = new ReplaySubject<void>();
 
   constructor(private http: HttpClient) { }
-
-  getCurrentUser() {
-    return this.currentUserMock;
-  }
 
   fetchUser() {
     return this.http.get<UserModel>('/user/me').pipe(
@@ -41,7 +31,7 @@ export class UserService {
     );
   }
 
-  getUserObservable() {
+  getCurrentUser() {
     return this.currentUser$.pipe(
       skipUntil(this.isUserFetched$)
     )

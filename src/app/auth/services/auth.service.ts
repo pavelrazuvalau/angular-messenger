@@ -9,7 +9,7 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private userService: UserService) {}
+  constructor(private http: HttpClient, private userService: UserService) { }
 
   register(payload: RegisterRequestModel) {
     return this.http.post<AuthResponseModel>('/auth/register', payload).pipe(

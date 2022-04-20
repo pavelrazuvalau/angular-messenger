@@ -1,25 +1,46 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { BaseConversationModel } from '../../models/conversation.model';
-import { Router } from '@angular/router';
+import { UserModel } from '../../../core/models/user.model';
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-conversation-list',
   templateUrl: './conversation-list.component.html',
   styleUrls: ['./conversation-list.component.scss']
 })
-export class ConversationListComponent implements OnInit {
+export class ConversationListComponent implements OnInit, OnDestroy {
   searchTerm: string = '';
+  debounceSubject = new Subject<void>();
 
-  @Input() list: BaseConversationModel[] = [];
-  @Input() selectedConversationId: string | undefined;
+  @Input() foundUsers: UserModel[] | null = [];
+  @Input() list: BaseConversationModel[] | null = [];
+  @Input() selectedUserId: string | undefined;
 
-  constructor(private router: Router) { }
+  @Output() searchUsers = new EventEmitter<string>();
+  @Output() selectUser = new EventEmitter<UserModel>();
 
   ngOnInit(): void {
+    this.debounceSubject.pipe(
+      debounceTime(300),
+    ).subscribe(() => {
+      this.searchUsers.emit(this.searchTerm);
+    })
+  }
+
+  ngOnDestroy() {
+    this.debounceSubject.complete();
+  }
+
+  onSearchInput(): void {
+    this.debounceSubject.next();
   }
 
   onSelectConversation(item: BaseConversationModel) {
-   this.router.navigate(['/', 'chat', item.id])
+    this.onSelectUser(item.participants[0]);
+  }
+
+  onSelectUser(user: UserModel) {
+    this.selectUser.emit(user);
   }
 
 }

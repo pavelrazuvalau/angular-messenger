@@ -4,12 +4,9 @@ import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'chat', // http://localhost:4200/chat
+    path: 'chat',
     loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule),
     canLoad: [AuthGuard],
-    data: {
-      applicableUserRoles: ['MODERATOR', 'ADMIN']
-    },
   },
   {
     path: 'auth',

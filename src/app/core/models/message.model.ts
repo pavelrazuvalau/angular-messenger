@@ -8,7 +8,7 @@ export interface BaseMessageModel {
 
 export interface ConversationMessageModel extends BaseMessageModel {
   recipient: string;
-  sender: string;
+  sender?: string;
 }
 
 export interface IncomingMessage extends BaseMessageModel {

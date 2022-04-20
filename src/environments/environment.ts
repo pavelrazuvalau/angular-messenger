@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://messenger-workshop.herokuapp.com/api/v1/'
+  apiUrl: 'https://messenger-workshop.herokuapp.com/api/v1/',
+  socketUrl: 'https://messenger-workshop.herokuapp.com',
 };
 
 /*

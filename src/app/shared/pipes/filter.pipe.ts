@@ -8,7 +8,7 @@ export class FilterPipe implements PipeTransform {
 
   transform(value: BaseConversationModel[], searchTerm: string): BaseConversationModel[] {
     return searchTerm
-      ? value.filter(item => item.participants[1].username.toLowerCase().includes(searchTerm.toLowerCase()))
+      ? value.filter(item => item.participants[0].username.toLowerCase().includes(searchTerm.toLowerCase()))
       : value;
   }
 

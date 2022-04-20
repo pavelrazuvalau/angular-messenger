@@ -86,3 +86,8 @@
   background-color: #ffffff;
   border-top: 1px solid white;
 }
+
+.chat-box {
+  height: calc(100vh - 220px);
+  overflow: scroll;
+}

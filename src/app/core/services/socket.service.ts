@@ -4,6 +4,7 @@ import Socket = SocketIOClient.Socket;
 
 import { environment } from '../../../environments/environment';
 import { IncomingMessage } from '../models/message.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +12,20 @@ import { IncomingMessage } from '../models/message.model';
 export class SocketService {
   socket: Socket | null = null;
 
-  connect(token: string) {
-    this.disconnect();
+  messageSubject = new Subject<IncomingMessage>();
 
-    this.socket = io(environment.apiUrl, { query: { auth_token: token } });
+  connect() {
+    this.socket = io.connect(environment.socketUrl, {
+      query: { auth_token: localStorage.getItem('token') },
+    });
 
-    this.socket?.on('message', (message: IncomingMessage) => {
-      console.log(message);
+    this.socket.on('message', (message: IncomingMessage) => {
+      this.messageSubject.next(message);
     });
   }
 
   disconnect() {
     this.socket?.disconnect();
+    this.socket = null;
   }
 }

@@ -10,7 +10,7 @@ import { UserModel } from '../../../core/models/user.model';
 export class ChatMessageComponent implements OnInit {
   @Input() message: ConversationMessageModel | undefined;
   @Input() user: UserModel | undefined;
-  @Input() currentUser: UserModel | undefined;
+  @Input() currentUser: UserModel | null = null;
 
   constructor() { }
 

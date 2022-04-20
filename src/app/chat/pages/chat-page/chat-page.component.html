@@ -4,7 +4,13 @@
   <div class="row no-gutters">
 
     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
-      <app-conversation-list [list]="conversationList" [selectedConversationId]="selectedConversation?.id"></app-conversation-list>
+      <app-conversation-list
+        [list]="conversationList | async"
+        [foundUsers]="foundUsers$ | async"
+        [selectedUserId]="selectedUserId"
+        (searchUsers)="onSearchUsers($event)"
+        (selectUser)="onSelectUser($event)"
+      ></app-conversation-list>
     </div>
 
     <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
