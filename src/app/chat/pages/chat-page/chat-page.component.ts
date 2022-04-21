@@ -17,13 +17,13 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./chat-page.component.scss']
 })
 export class ChatPageComponent implements OnInit, OnDestroy {
-  selectedConversation: SelectedConversationModel | undefined;
+  selectedConversation: SelectedConversationModel | null = null;
   conversationList = this.chatService.getConversationList();
   currentUser: UserModel | null = null;
 
   foundUsers$: Observable<UserModel[]> | null = null;
 
-  selectedUserId!: string;
+  selectedUserId: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,6 +40,9 @@ export class ChatPageComponent implements OnInit, OnDestroy {
       if (selectedUserId) {
         this.selectedUserId = selectedUserId;
         this.onSelectConversation(selectedUserId);
+      } else {
+        this.selectedUserId = null;
+        this.selectedConversation = null;
       }
     });
 

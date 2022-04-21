@@ -14,7 +14,7 @@ export class ConversationListComponent implements OnInit, OnDestroy {
 
   @Input() foundUsers: UserModel[] | null = [];
   @Input() list: BaseConversationModel[] | null = [];
-  @Input() selectedUserId: string | undefined;
+  @Input() selectedUserId!: string | null;
 
   @Output() searchUsers = new EventEmitter<string>();
   @Output() selectUser = new EventEmitter<UserModel>();
