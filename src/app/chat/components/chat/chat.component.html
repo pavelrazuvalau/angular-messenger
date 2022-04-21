@@ -10,7 +10,6 @@
         [user]="getUser(message)"
         [currentUser]="currentUser"
       ></app-chat-message>
-      <div #lastMessageAnchor></div>
     </ul>
     <form class="input-group mt-3 mb-0" (submit)="onPostMessage()">
       <input [(ngModel)]="newMessage" class="form-control" rows="3" placeholder="Type your message here..."
