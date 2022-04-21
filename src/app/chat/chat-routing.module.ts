@@ -4,13 +4,12 @@ import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: ChatPageComponent,
+    path: '', redirectTo: '/chat/', pathMatch: 'full'
   },
   {
     path: ':id',
     component: ChatPageComponent,
-  }
+  },
 ];
 
 @NgModule({
