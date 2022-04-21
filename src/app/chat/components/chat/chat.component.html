@@ -13,6 +13,7 @@
     </ul>
     <form class="input-group mt-3 mb-0" (submit)="onPostMessage()">
       <input [(ngModel)]="newMessage" class="form-control" rows="3" placeholder="Type your message here..."
+             autocomplete="off"
              name="message">
       <button type="submit" class="btn btn-info">Submit</button>
     </form>
