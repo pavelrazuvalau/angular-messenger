@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 import { ChatService } from './services/chat.service';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { ChatService } from './services/chat.service';
     ChatRoutingModule,
     FormsModule,
     SharedModule,
+    StoreModule.forFeature('chat', (state = {}) => ({ lalala: 1 })),
+    EffectsModule.forFeature([]),
   ],
   providers: [ChatService],
 })

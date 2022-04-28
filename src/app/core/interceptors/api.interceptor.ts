@@ -9,11 +9,14 @@ import {
 import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../services/user.service';
+import { Store } from '@ngrx/store';
+
+import * as UserAction from '../store/actions/user.actions';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private store: Store) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request.clone({
@@ -24,7 +27,7 @@ export class ApiInterceptor implements HttpInterceptor {
     })).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === HttpStatusCode.Unauthorized) {
-          this.userService.clearData();
+          this.store.dispatch(UserAction.ClearData());
         }
 
         return throwError(error);

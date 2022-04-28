@@ -1,9 +1,9 @@
 import { UserModel } from './user.model';
 
 export interface BaseMessageModel {
-  id: string;
   message: string;
   timestamp: string;
+  id?: string;
 }
 
 export interface ConversationMessageModel extends BaseMessageModel {
